@@ -4,6 +4,7 @@ import Form from './components/Form'
 import NavBar from './components/NavBar'
 import View from './pages/View'
 import Home from './pages/Home'
+import Edit from './pages/Edit'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/' element={<Home/>} />
         <Route path='/users' element={<View/>} />
         <Route path='/create' element={<Form/>} />
+        <Route path='/edit/:id' element={<Edit/>} />
         
       </Routes>
      

@@ -9,7 +9,25 @@ const app=express()
 
 app.use(express.json())
 app.use(cors())
+//endpoint to get a single user using id and re.params
 
+app.get('/users/:id',(req,res)=>{
+    const{id}=req.params
+
+    con.query(`SELECT * FROM users WHERE id=${id}`,(err,data)=>{
+        if(err){
+            return res.status(500).json({
+                message:"internal server error",
+                error:err.message
+            })
+        }
+        return res.status(200).json({
+            message:"User fetched succesfully!",
+            result:data[0]
+        })
+    })
+
+})
 //defining endpoints to get all users from sms db
 app.get('/users',(req,res)=>{
     con.query("SELECT * FROM users",(err,data)=>{
