@@ -16,6 +16,17 @@ function View() {
     alert(err.error)
   })
  },[])
+ const handleDelete=(id)=>{
+  axios.delete(`http://localhost:4000/delete/${id}`)
+  .then((res)=>{
+    alert(res.data.message)
+    setStudents(students.filter(student=>student.id !==id))
+
+  })
+  .catch((err)=>{
+    alert(err)
+  })
+ }
 
   return (
     <div>
@@ -41,7 +52,7 @@ function View() {
         <td>{student.course}</td>
         <td>
           <button className='bg-green-600 text-white px-4 py-2 rounded hover:bg-black'>Edit</button>
-          <button className='bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 ml-2'>Delete</button>
+          <button onClick={()=>handleDelete(student.id)} className='bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 ml-2'>Delete</button>
         </td>
       </tr>
     ))}
