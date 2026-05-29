@@ -12,6 +12,7 @@ app.use(cors())
 //endpoint to get a single user using id and re.params
 
 app.get('/users/:id',(req,res)=>{
+    
     const{id}=req.params
 
     con.query(`SELECT * FROM users WHERE id=${id}`,(err,data)=>{

@@ -1,9 +1,12 @@
 import React from 'react'
 import { useState ,useEffect} from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router'
 
 
 function View() {
+
+  const navigate=useNavigate()
 
   const [students,setStudents]=useState([])
 
@@ -16,6 +19,7 @@ function View() {
     alert(err.message)
   })
  },[])
+ //handle delete student by id
  const handleDelete=(id)=>{
   axios.delete(`http://localhost:4000/delete/${id}`)
   .then((res)=>{
@@ -51,7 +55,7 @@ function View() {
         <td>{student.lname}</td>
         <td>{student.course}</td>
         <td>
-          <button onClick={()=>navigate(`/edit/{student.id}`)} className='bg-green-600 text-white px-4 py-2 rounded hover:bg-black'>Edit</button>
+          <button onClick={()=>navigate(`/edit/${student.id}`)} className='bg-green-600 text-white px-4 py-2 rounded hover:bg-black'>Edit</button>
           <button onClick={()=>handleDelete(student.id)} className='bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 ml-2'>Delete</button>
         </td>
       </tr>

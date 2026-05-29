@@ -5,15 +5,17 @@ import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
 function Edit() {
+    //helps to navigate to other page after update
     const navigate=useNavigate()
-
+//helps to get id from url
 const {id}=useParams()
-
+//helps to store data of user in form
 const[data,setData]=useState({
   fname:"",
   lname:"",
   course:""
 })
+//helps to get data of user by id and set in form
 useEffect(()=>{
     axios.get(`http://localhost:4000/user/${id}`)
     .then((res)=>{
@@ -23,6 +25,7 @@ useEffect(()=>{
         alert(err.message)
     })
 },[id])
+//helps to update data of user in form
 
 const handleChange=(e)=>{
      
@@ -31,14 +34,18 @@ const handleChange=(e)=>{
         return {...prev,[name]:value}
 
     })}
-
+//helps to submit updated data of user in form
 const handleSubmit=(e)=>{
+
     e.preventDefault()
+
     axios.put(`http://localhost:4000/update/${id}`,data)
+
     .then((res)=>{
         alert(res.data.message)
         navigate('/users')
     })
+
     .catch((err)=>{
         alert(err.error)
     })
