@@ -13,7 +13,7 @@ function View() {
     setStudents(res.data.result)
   })
   .catch((err)=>{
-    alert(err.error)
+    alert(err.message)
   })
  },[])
  const handleDelete=(id)=>{
